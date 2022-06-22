@@ -8,30 +8,64 @@
             <div class="modal-body">
 
 
-                <form method="POST" id="form" action="">
+                <form method="POST" class="needs-validation" novalidate id="form" action="">
                     @csrf
+                    @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <p>En ningún campo no puedes exceder más de 100 caracteres:</p>
+                    </div>
+                    @endif
                     <div class="container-fluid">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" name="NAME" class="form-control" id="recipient-name">
+                            <input required type="text" name="NAME" class="form-control" id="recipient-name">
+                            <div class="invalid-feedback">
+                                Por favor ingrese un nombre.
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="recipient-name" class="col-form-label">Apellido Paterno:</label>
-                                <input type="text" name="LAST_NAME" class="form-control" id="recipient-last">
+                                <input required type="text" name="LAST_NAME" class="form-control" id="recipient-last">
+                                <div class="invalid-feedback">
+                                    Por favor ingrese un apellido paterno.
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="recipient-name" class="col-form-label">Apellido Materno:</label>
-                                <input type="text" name="LAST_NAME2" class="form-control" id="recipient-last2">
+                                <input required type="text" name="LAST_NAME2" class="form-control" id="recipient-last2">
+                                <div class="invalid-feedback">
+                                    Por favor ingrese un apellido materno.
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                        <button type="submit" class="btn btn-primary" id="save">Guardar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        (function() {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                            $('#save').prop('disabled', true);
+                        }
+                        $('#save').prop('disabled', false);
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>

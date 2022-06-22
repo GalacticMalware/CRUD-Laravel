@@ -76,7 +76,7 @@
         $('#recipient-name').val(NAME == undefined ? "" : NAME);
         $('#recipient-last').val(LAST_NAME == undefined ? "" : LAST_NAME);
         $('#recipient-last2').val(LAST_NAME2 == undefined ? "" : LAST_NAME2);
-        $("#form").attr('action', data == '' ? '/store' : `/update/${id == undefined ? "" : id}`);
+        $("#form").attr('action', data == '' ? '/' : `/update/${id == undefined ? "" : id}`);
 
     }
 </script>

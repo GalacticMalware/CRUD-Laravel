@@ -8,5 +8,5 @@ use App\Http\Controllers\User;
 });*/
 
 Route::get('/', [User::class, 'index'])->name('Users');
-Route::post('/store', [User::class, 'store'])->name("addUser");
+Route::post('/', [User::class, 'store'])->name("addUser");
 Route::post('/update/{id}', [User::class, 'update'])->name("editUser");

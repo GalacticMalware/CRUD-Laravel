@@ -18,12 +18,24 @@ class User extends Controller
 
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            "NAME" => "required|max:99",
+            "LAST_NAME" => "required|max:99",
+            "LAST_NAME2" => "required|max:99"
+        ]);
         Users::create($request->all());
         return redirect('/');
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "NAME" => "required|max:99",
+            "LAST_NAME" => "required|max:99",
+            "LAST_NAME2" => "required|max:99"
+        ]);
+        
         $user  = Users::findOrFail($id);
         $user->update($request->all());
         return redirect('/');
